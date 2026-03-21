@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ben Price — Product Marketing</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #0a0a0a;
+      --gray-1: #1c1c1e;
+      --gray-2: #3a3a3c;
+      --gray-3: #636366;
+      --gray-4: #aeaeb2;
+      --gray-5: #e5e5ea;
+      --gray-6: #f2f2f7;
+      --white: #ffffff;
+      --accent: #FF8C42;
+      --font: "Lexend", sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      background: var(--white);
+      color: var(--black);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 0 48px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .nav-name {
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: var(--black);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 120px 48px 80px;
+      background: linear-gradient(180deg, #fafafa 0%, #ffffff 100%);
+    }
+
+    .hero-eyebrow {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .hero-name {
+      font-size: clamp(52px, 8vw, 96px);
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      line-height: 1.0;
+      color: var(--black);
+      margin-bottom: 24px;
+    }
+
+    .hero-tagline {
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      color: var(--gray-2);
+      max-width: 600px;
+      line-height: 1.4;
+      margin-bottom: 48px;
+    }
+
+    .hero-tagline strong {
+      font-weight: 600;
+      color: var(--black);
+    }
+
+    .cta-group {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      padding: 14px 28px;
+      background: var(--accent);
+      color: white;
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 980px;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: #e87a30;
+      transform: scale(1.02);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      padding: 14px 28px;
+      background: transparent;
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 500;
+      border-radius: 980px;
+      border: 1.5px solid var(--accent);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .btn-secondary:hover {
+      background: var(--accent);
+      color: white;
+    }
+
+    /* SECTIONS */
+    section { padding: 100px 48px; }
+
+    .section-label {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      color: var(--black);
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 19px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: var(--gray-2);
+      max-width: 620px;
+    }
+
+    /* ABOUT */
+    .about {
+      background: var(--white);
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-left .section-body { margin-top: 24px; }
+
+    .about-stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .stat-card {
+      background: var(--gray-6);
+      border-radius: 18px;
+      padding: 28px 24px;
+    }
+
+    .stat-number {
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -0.04em;
+      color: var(--black);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--gray-3);
+      line-height: 1.4;
+    }
+
+    /* EXPERTISE */
+    .expertise-section {
+      background: var(--black);
+      color: var(--white);
+    }
+
+    .expertise-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .expertise-section .section-label { color: #ffb380; }
+    .expertise-section .section-title { color: var(--white); }
+
+    .expertise-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 60px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .expertise-card {
+      background: var(--gray-1);
+      padding: 40px 36px;
+      transition: background 0.2s;
+    }
+
+    .expertise-card:hover { background: #2c2c2e; }
+
+    .expertise-icon {
+      font-size: 28px;
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    .expertise-title {
+      font-size: 19px;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .expertise-desc {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-4);
+      line-height: 1.6;
+    }
+
+    /* EXPERIENCE */
+    .experience-section { background: var(--gray-6); }
+
+    .experience-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .experience-header {
+      margin-bottom: 60px;
+    }
+
+    .experience-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border-radius: 20px;
+      overflow: hidden;
+    }
+
+    .experience-item {
+      background: var(--white);
+      padding: 40px 48px;
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 40px;
+      align-items: start;
+      transition: background 0.2s;
+    }
+
+    .experience-item:hover { background: #fafafa; }
+
+    .exp-meta {}
+
+    .exp-company {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--black);
+      margin-bottom: 4px;
+    }
+
+    .exp-period {
+      font-size: 13px;
+      color: var(--gray-3);
+    }
+
+    .exp-content {}
+
+    .exp-role {
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 16px;
+    }
+
+    .exp-bullets {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .exp-bullets li {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--gray-2);
+      line-height: 1.5;
+      padding-left: 20px;
+      position: relative;
+    }
+
+    .exp-bullets li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--gray-4);
+    }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--white);
+      text-align: center;
+    }
+
+    .contact-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .contact-inner .section-body {
+      margin: 20px auto 48px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .contact-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 22px;
+      background: var(--gray-6);
+      border-radius: 980px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--black);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .contact-chip:hover {
+      background: var(--gray-5);
+      transform: scale(1.03);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--gray-5);
+      padding: 32px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-left {
+      font-size: 13px;
+      color: var(--gray-3);
+    }
+
+    .footer-right {
+      font-size: 13px;
+      color: var(--gray-4);
+    }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--gray-5);
+    }
+
+    /* FADE IN */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      section { padding: 72px 24px; }
+      .about { grid-template-columns: 1fr; gap: 48px; }
+      .expertise-grid { grid-template-columns: 1fr; }
+      .experience-item { grid-template-columns: 1fr; gap: 16px; }
+      footer { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-name">Ben Price</span>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#expertise">Expertise</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow fade-in">Product marketing manager</p>
+    <h1 class="hero-name fade-in">Ben Price</h1>
+    <p class="hero-tagline fade-in">
+      I take products to market, build the stories that win deals,
+      and give revenue teams what they need to <strong>actually close.</strong>
+    </p>
+    <div class="cta-group fade-in">
+      <a href="#contact" class="btn-primary">Get in touch</a>
+      <a href="#experience" class="btn-secondary">See my work</a>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about" style="padding-top: 100px; padding-bottom: 100px;">
+    <div class="about">
+      <div class="about-left fade-in">
+        <p class="section-label">About</p>
+        <h2 class="section-title">Marketers talk. I build the machine.</h2>
+        <p class="section-body">
+          I spent years at Pushpay — a B2B SaaS company serving tens of thousands of churches — owning the work
+          that most PMMs split across three people: bringing partnerships and integrations to market,
+          running competitive intelligence, enabling sales and CS, and producing the customer stories
+          that made all of it credible.
+        </p>
+        <p class="section-body" style="margin-top: 16px;">
+          I've operated across two distinct buyer segments simultaneously — Protestant and Catholic —
+          which means I know how to read a room, adjust a message, and still hit the same commercial goal.
+        </p>
+      </div>
+      <div class="about-right fade-in">
+        <div class="about-stat-grid">
+          <div class="stat-card">
+            <div class="stat-number">2</div>
+            <div class="stat-label">Distinct verticals managed simultaneously</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">GTM</div>
+            <div class="stat-label">Partnerships & integrations brought to market</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">360°</div>
+            <div class="stat-label">Sales, CS, and competitive enablement</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">Full</div>
+            <div class="stat-label">Customer evidence cycle, end to end</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERTISE -->
+  <section id="expertise" class="expertise-section">
+    <div class="expertise-inner">
+      <p class="section-label fade-in">Expertise</p>
+      <h2 class="section-title fade-in">What I actually do well.</h2>
+      <div class="expertise-grid">
+        <div class="expertise-card fade-in">
+          <span class="expertise-icon">⟶</span>
+          <h3 class="expertise-title">Partnerships & Integrations GTM</h3>
+          <p class="expertise-desc">Positioning, launch strategy, and enablement for partner-driven products. I've taken integrations from "it exists" to "our reps lead with it."</p>
+        </div>
+        <div class="expertise-card fade-in">
+          <span class="expertise-icon">◎</span>
+          <h3 class="expertise-title">Competitive Intelligence</h3>
+          <p class="expertise-desc">Building the systems — battlecards, win/loss analysis, real-time tracking — that turn competitive pressure into a sales advantage rather than a liability.</p>
+        </div>
+        <div class="expertise-card fade-in">
+          <span class="expertise-icon">◈</span>
+          <h3 class="expertise-title">Sales & CS Enablement</h3>
+          <p class="expertise-desc">Playbooks, training, and content that revenue teams actually use. Not a library. A toolkit built around the specific conversations they're having.</p>
+        </div>
+        <div class="expertise-card fade-in">
+          <span class="expertise-icon">◇</span>
+          <h3 class="expertise-title">Customer Evidence</h3>
+          <p class="expertise-desc">Case studies, testimonials, and reference programs that move buyers. I find the story inside a customer's success and make it do commercial work.</p>
+        </div>
+        <div class="expertise-card fade-in">
+          <span class="expertise-icon">⊕</span>
+          <h3 class="expertise-title">Multi-Segment Messaging</h3>
+          <p class="expertise-desc">Experience running parallel go-to-market motions across distinct buyer segments — different needs, different language, same product, same deadline.</p>
+        </div>
+        <div class="expertise-card fade-in">
+          <span class="expertise-icon">◐</span>
+          <h3 class="expertise-title">Cross-Functional Execution</h3>
+          <p class="expertise-desc">PMM is a coordination role. I've worked across product, sales, partnerships, and CS to align on strategy and actually ship the thing on time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCE -->
+  <section id="experience" class="experience-section">
+    <div class="experience-inner">
+      <div class="experience-header fade-in">
+        <p class="section-label">Experience</p>
+        <h2 class="section-title">Where I've done this.</h2>
+      </div>
+      <div class="experience-list">
+        <div class="experience-item fade-in">
+          <div class="exp-meta">
+            <div class="exp-company">Pushpay USA Inc</div>
+            <div class="exp-period">Oct 2025 – Mar 2026</div>
+          </div>
+          <div class="exp-content">
+            <div class="exp-role">Product Marketing Manager</div>
+            <ul class="exp-bullets">
+              <li>Owned GTM strategy for partnerships and integrations across Protestant and Catholic verticals — from positioning through launch and ongoing enablement.</li>
+              <li>Built and maintained competitive intelligence infrastructure: battlecards, win/loss tracking, and competitive positioning for the sales team.</li>
+              <li>Developed sales and CS enablement programs including playbooks, training materials, and segment-specific messaging frameworks.</li>
+              <li>Led customer evidence efforts end to end — sourcing, interviewing, writing, and deploying case studies that supported pipeline and closed deals.</li>
+              <li>Operated as a strategic bridge between product, partnerships, sales, and CS across two simultaneous buyer segments.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="contact-inner">
+      <p class="section-label fade-in">Contact</p>
+      <h2 class="section-title fade-in">Let's talk.</h2>
+      <p class="section-body fade-in">
+        I'm looking for my next PMM role — ideally somewhere that takes go-to-market seriously
+        and has real complexity to work through. If that sounds like your team, I'd like to hear about it.
+      </p>
+      <div class="contact-links fade-in">
+        <a href="mailto:contactbenprice@gmail.com" class="contact-chip">
+          ✉ contactbenprice@gmail.com
+        </a>
+        <a href="https://github.com/contactbenprice" target="_blank" class="contact-chip">
+          ⌥ GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/iambenprice/" target="_blank" class="contact-chip">
+          ↗ LinkedIn
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span class="footer-left">Ben Price — Product Marketing Manager</span>
+    <span class="footer-right">contactbenprice@gmail.com</span>
+  </footer>
+
+  <script>
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, i * 80);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
