@@ -3,9 +3,9 @@
 Personal landing page for job search — built to send to recruiters.
 
 ## Status
-- Built and running locally
-- Pushed to GitHub: https://github.com/contactbenprice/claude-dev
-- Vercel account created — deployment pending (need to run `! vercel login` then `! vercel` to go live)
+- Live on the internet: https://resume-site-lemon-zeta.vercel.app
+- GitHub: https://github.com/contactbenprice/claude-dev
+- Vercel project: contactbenprices-projects/resume-site
 
 ## Design
 - Font: Lexend (400 body, 600 headers)
@@ -20,10 +20,9 @@ Personal landing page for job search — built to send to recruiters.
 5. Contact — email, LinkedIn (linkedin.com/in/iambenprice), GitHub
 
 ## To do
-- [ ] Log in to Vercel: `! vercel login`
-- [ ] Deploy: `! vercel` from this folder
 - [ ] Add specific wins and numbers to stat cards and experience bullets
 - [ ] Add headshot (optional)
+- [ ] Get cleaner URL (e.g. benprice.vercel.app)
 
 ## Run locally
 ```
