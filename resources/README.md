@@ -34,7 +34,13 @@ Or all at once: `! git add . && git commit -m "your message" && git push`
 | `git push` | Upload snapshot to GitHub |
 | `git log` | See history of all snapshots |
 
+## Deploying to Vercel (making a site live on the internet)
+1. Log in once: `! vercel login` (opens browser)
+2. From your site folder: `! vercel` (follow prompts)
+3. Every future update: `! vercel --prod`
+
 ## Key Links
 - My GitHub: https://github.com/contactbenprice
 - My Repo: https://github.com/contactbenprice/claude-dev
+- My resume site folder: work/job-search/resume-site/
 - Claude Code Docs: https://docs.anthropic.com/claude-code
