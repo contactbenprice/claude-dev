@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Precision &amp; Safety — Ballistics &amp; Firearms Training</title>
+  <title>gunsRus — Ballistics &amp; Firearms Training</title>
   <style>
     /* ── Design tokens ── */
     :root {
@@ -152,7 +152,44 @@
         url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='28' fill='none' stroke='%232a2f38' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='18' fill='none' stroke='%232a2f38' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='8' fill='none' stroke='%232a2f38' stroke-width='1'/%3E%3Cline x1='30' y1='0' x2='30' y2='60' stroke='%232a2f38' stroke-width='0.5'/%3E%3Cline x1='0' y1='30' x2='60' y2='30' stroke='%232a2f38' stroke-width='0.5'/%3E%3C/svg%3E");
       background-size: cover, 60px 60px;
     }
-    .hero-content { text-align: center; padding: 3rem 0; }
+    /* hero two-column layout */
+    .hero-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      padding: 3rem 0;
+    }
+    @media (max-width: 820px) {
+      .hero-layout {
+        grid-template-columns: 1fr;
+      }
+      .hero-image-wrap { order: -1; }
+    }
+    .hero-content { text-align: left; }
+    .hero-image-wrap {
+      position: relative;
+    }
+    .hero-img {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      display: block;
+    }
+    .hero-img-caption {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: linear-gradient(transparent, rgba(13,15,18,0.85));
+      color: var(--text-muted);
+      font-size: 0.75rem;
+      padding: 1.5rem 1rem 0.75rem;
+      border-radius: 0 0 10px 10px;
+      text-align: center;
+    }
     .hero-badge {
       display: inline-block;
       background: var(--surface2);
@@ -181,7 +218,7 @@
       font-size: clamp(1rem, 2.5vw, 1.2rem);
       color: var(--text-muted);
       max-width: 600px;
-      margin: 0 auto 2rem;
+      margin: 0 0 2rem;
     }
     .price-tag {
       display: inline-flex;
@@ -198,7 +235,7 @@
     .hero-actions {
       display: flex;
       gap: 1rem;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
     }
     .btn {
@@ -564,7 +601,7 @@
 <!-- ═══════════════════════════════════════ NAV -->
 <nav id="top-nav">
   <div class="nav-inner">
-    <span class="nav-brand">Precision<span>&amp;</span>Safety</span>
+    <span class="nav-brand">guns<span>Rus</span></span>
     <ul class="nav-links">
       <li><a href="#overview">Course</a></li>
       <li><a href="#eligibility">Eligibility</a></li>
@@ -593,22 +630,35 @@
 
 <!-- ═══════════════════════════════════════ HERO -->
 <section id="hero">
-  <div class="container hero-content">
-    <span class="hero-badge">Certified Firearms Instructor · Professional Course</span>
-    <h1 class="hero-title">
-      Ballistics &amp; Firearms<br/>
-      <em>Safety Mastery</em>
-    </h1>
-    <p class="hero-sub">
-      A rigorous, hands-on course covering internal, external, and terminal ballistics — paired with safe-handling fundamentals that will stay with you for life.
-    </p>
-    <div class="price-tag">
-      <span class="price-amount">$1,200</span>
-      <span class="price-suffix">per person</span>
-    </div>
-    <div class="hero-actions">
-      <a href="#contact" class="btn btn-primary">Enroll Now</a>
-      <a href="#overview" class="btn btn-outline">See Course Details</a>
+  <div class="container">
+    <div class="hero-layout">
+      <div class="hero-content">
+        <span class="hero-badge">Certified Firearms Instructor · Professional Course</span>
+        <h1 class="hero-title">
+          Ballistics &amp; Firearms<br/>
+          <em>Safety Mastery</em>
+        </h1>
+        <p class="hero-sub">
+          A rigorous, hands-on course covering internal, external, and terminal ballistics — paired with safe-handling fundamentals that will stay with you for life.
+        </p>
+        <div class="price-tag">
+          <span class="price-amount">$4,000</span>
+          <span class="price-suffix">per person</span>
+        </div>
+        <div class="hero-actions">
+          <a href="#contact" class="btn btn-primary">Enroll Now</a>
+          <a href="#overview" class="btn btn-outline">See Course Details</a>
+        </div>
+      </div>
+      <div class="hero-image-wrap">
+        <!-- Replace src with your actual photo of a shooter with a Tikka 308 in MDT XRS chassis -->
+        <img
+          src="https://placehold.co/700x480/161a1f/c8973a?text=Add+Range+Photo+Here"
+          alt="Shooter on training range with Tikka 308 in MDT XRS chassis"
+          class="hero-img"
+        />
+        <div class="hero-img-caption">Tikka 308 · MDT XRS Chassis · Training Range</div>
+      </div>
     </div>
   </div>
 </section>
@@ -816,7 +866,7 @@
         <span class="stat-label">Range Hours</span>
       </div>
       <div class="stat-block">
-        <span class="stat-value">$1,200</span>
+        <span class="stat-value">$4,000</span>
         <span class="stat-label">Per Person</span>
       </div>
     </div>
@@ -1125,7 +1175,7 @@
           <span class="contact-detail-icon">💰</span>
           <div class="contact-detail-text">
             <strong>Course Fee</strong>
-            $1,200 per person — deposit required to secure your spot
+            $4,000 per person — deposit required to secure your spot
           </div>
         </div>
         <div class="contact-detail">
@@ -1214,7 +1264,7 @@
 <!-- ═══════════════════════════════════════ FOOTER -->
 <footer>
   <div class="container">
-    <div class="footer-brand">Precision &amp; Safety — Firearms Training</div>
+    <div class="footer-brand">gunsRus — Firearms Training</div>
     <div class="text-muted">[PLACEHOLDER — Your name or business name] · [City, State]</div>
     <div class="footer-links">
       <a href="#overview">Course</a>
