@@ -6,7 +6,8 @@
       "Bash(gh api:*)",
       "Bash(git config:*)",
       "Bash(gh repo:*)",
-      "Bash(vercel --prod --yes)"
+      "Bash(vercel --prod --yes)",
+      "mcp__75ccfdd9-632a-4479-8095-e837c28615e2__list_teams"
     ]
   },
   "outputStyle": "Explanatory"
