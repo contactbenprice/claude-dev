@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: #0A0A0A;
+    color: #F5F5F5;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  #root {
+    min-height: 100svh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-8 py-4 bg-tm-red text-white font-headline font-semibold tracking-widest uppercase text-sm transition-all duration-200 hover:bg-tm-red-bright active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-tm-red focus-visible:ring-offset-2 focus-visible:ring-offset-surface-0;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3 border border-surface-4 text-text-secondary font-body text-sm transition-all duration-200 hover:border-text-secondary hover:text-text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-surface-4;
+  }
+
+  .input-field {
+    @apply w-full bg-surface-3 border border-surface-4 text-text-primary font-body text-base px-4 py-3 placeholder-text-muted transition-all duration-200
+    focus:outline-none focus:border-tm-red focus:bg-surface-2
+    hover:border-surface-4;
+  }
+
+  .label-text {
+    @apply block text-text-secondary font-body text-xs font-medium tracking-widest uppercase mb-2;
+  }
+
+  .card-surface {
+    @apply bg-surface-2 border border-surface-3;
+  }
+
+  .section-divider {
+    @apply border-t border-surface-3;
+  }
+}
