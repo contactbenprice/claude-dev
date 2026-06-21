@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Precision &amp; Safety — Ballistics &amp; Firearms Training</title>
+  <style>
+    /* ── Design tokens ── */
+    :root {
+      --bg:         #0d0f12;
+      --surface:    #161a1f;
+      --surface2:   #1e2329;
+      --border:     #2a2f38;
+      --accent:     #c8973a;   /* brass / gunmetal gold */
+      --accent2:    #8fbcd4;   /* steel blue */
+      --text:       #e4e6ea;
+      --text-muted: #8b929e;
+      --danger:     #d9534f;
+      --radius:     6px;
+      --max-w:      1100px;
+    }
+
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      line-height: 1.7;
+    }
+    h1, h2, h3 { line-height: 1.25; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    img { display: block; max-width: 100%; }
+
+    .container { max-width: var(--max-w); margin: 0 auto; padding: 0 1.5rem; }
+    .section-label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: var(--accent);
+      border: none;
+      margin: 0 0 2rem;
+    }
+    section { padding: 5rem 0; }
+
+    /* ── Nav ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13, 15, 18, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 64px;
+    }
+    .nav-brand {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: 0.05em;
+    }
+    .nav-brand span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 1.75rem;
+      list-style: none;
+    }
+    .nav-links a {
+      color: var(--text-muted);
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); text-decoration: none; }
+    .nav-cta {
+      background: var(--accent);
+      color: #0d0f12 !important;
+      padding: 0.45rem 1rem;
+      border-radius: var(--radius);
+      font-weight: 700 !important;
+    }
+    .nav-cta:hover { opacity: 0.88; text-decoration: none !important; }
+
+    /* hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      transition: 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 1rem 1.5rem 1.5rem;
+      gap: 1rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links, .nav-right > a:not(.hamburger) { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(to bottom, rgba(13,15,18,0.75) 0%, rgba(13,15,18,0.92) 100%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Ccircle cx='30' cy='30' r='28' fill='none' stroke='%232a2f38' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='18' fill='none' stroke='%232a2f38' stroke-width='1'/%3E%3Ccircle cx='30' cy='30' r='8' fill='none' stroke='%232a2f38' stroke-width='1'/%3E%3Cline x1='30' y1='0' x2='30' y2='60' stroke='%232a2f38' stroke-width='0.5'/%3E%3Cline x1='0' y1='30' x2='60' y2='30' stroke='%232a2f38' stroke-width='0.5'/%3E%3C/svg%3E");
+      background-size: cover, 60px 60px;
+    }
+    .hero-content { text-align: center; padding: 3rem 0; }
+    .hero-badge {
+      display: inline-block;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.9rem;
+      border-radius: 2rem;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .price-tag {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.25rem;
+      margin-bottom: 2.25rem;
+    }
+    .price-amount {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: #fff;
+    }
+    .price-suffix { color: var(--text-muted); font-size: 1rem; }
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.75rem;
+      border-radius: var(--radius);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      border: none;
+      transition: opacity 0.2s, transform 0.1s;
+      text-decoration: none;
+    }
+    .btn:hover { opacity: 0.88; text-decoration: none; }
+    .btn:active { transform: scale(0.98); }
+    .btn-primary { background: var(--accent); color: #0d0f12; }
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* ── Overview ── */
+    #overview { background: var(--surface); }
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .overview-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .overview-card-icon {
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .overview-card h3 {
+      font-size: 1.1rem;
+      color: #fff;
+      margin-bottom: 0.5rem;
+    }
+    .overview-card p { color: var(--text-muted); font-size: 0.95rem; }
+    .overview-card ul {
+      list-style: none;
+      margin-top: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .overview-card ul li {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      padding-left: 1.1rem;
+      position: relative;
+    }
+    .overview-card ul li::before {
+      content: "›";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── Who this is for ── */
+    #eligibility { background: var(--bg); }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .card h3 { font-size: 1rem; color: var(--accent); margin-bottom: 1rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; }
+    .checklist { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+    .checklist li { display: flex; gap: 0.6rem; align-items: flex-start; font-size: 0.95rem; }
+    .checklist li span:first-child { color: var(--accent); flex-shrink: 0; font-size: 1.1rem; line-height: 1.4; }
+
+    /* ── What to bring ── */
+    #gear { background: var(--surface); }
+    .gear-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2.5rem;
+    }
+    .gear-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .gear-card h3 { font-size: 0.85rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 1rem; }
+    .gear-note {
+      margin-top: 2rem;
+      padding: 1rem 1.25rem;
+      background: rgba(200, 151, 58, 0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 var(--radius) var(--radius) 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+    .gear-note strong { color: var(--accent); }
+
+    /* ── Schedule ── */
+    #schedule { background: var(--bg); }
+    .schedule-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 2.5rem 0;
+    }
+    .stat-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      text-align: center;
+    }
+    .stat-block .stat-value {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      display: block;
+    }
+    .stat-block .stat-label { font-size: 0.85rem; color: var(--text-muted); }
+    .schedule-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (max-width: 640px) { .schedule-body { grid-template-columns: 1fr; } }
+    .timeline { display: flex; flex-direction: column; gap: 0; }
+    .timeline-item {
+      display: flex;
+      gap: 1rem;
+    }
+    .timeline-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+    }
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+      margin-top: 0.4rem;
+    }
+    .line {
+      width: 2px;
+      flex: 1;
+      background: var(--border);
+      margin-top: 4px;
+    }
+    .timeline-item:last-child .line { display: none; }
+    .timeline-content { padding-bottom: 1.5rem; }
+    .timeline-content h4 { color: #fff; font-size: 0.95rem; margin-bottom: 0.25rem; }
+    .timeline-content p { color: var(--text-muted); font-size: 0.875rem; }
+
+    /* ── Bio ── */
+    #bio { background: var(--surface); }
+    .bio-card {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 2rem;
+      align-items: start;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 600px) { .bio-card { grid-template-columns: 1fr; } }
+    .bio-avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 2px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--text-muted);
+    }
+    .bio-name { font-size: 1.4rem; color: #fff; font-weight: 700; margin-bottom: 0.25rem; }
+    .bio-title { color: var(--accent); font-size: 0.875rem; margin-bottom: 1rem; }
+    .bio-body { color: var(--text-muted); font-size: 0.95rem; }
+    .credentials {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+    .cred-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 2rem;
+      padding: 0.25rem 0.75rem;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    /* ── Safety & Legal ── */
+    #safety { background: var(--bg); }
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.25rem;
+      margin-top: 2.5rem;
+    }
+    .safety-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 3px solid var(--accent);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+    .safety-item h3 { color: #fff; font-size: 0.95rem; margin-bottom: 0.5rem; }
+    .safety-item p { color: var(--text-muted); font-size: 0.875rem; }
+    .legal-note {
+      margin-top: 2rem;
+      padding: 1.25rem 1.5rem;
+      background: rgba(217, 83, 79, 0.07);
+      border: 1px solid rgba(217, 83, 79, 0.25);
+      border-radius: var(--radius);
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    .legal-note strong { color: #e07c79; }
+
+    /* ── FAQ ── */
+    #faq { background: var(--surface); }
+    .faq-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--border);
+    }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-question {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 1.5rem;
+      cursor: pointer;
+      background: var(--surface2);
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: var(--text);
+      transition: background 0.2s;
+      gap: 1rem;
+      user-select: none;
+    }
+    .faq-question:hover { background: var(--border); color: #fff; }
+    .faq-icon {
+      font-size: 1.25rem;
+      color: var(--accent);
+      flex-shrink: 0;
+      transition: transform 0.25s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      background: var(--surface);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 400px;
+      padding: 1.25rem 1.5rem;
+    }
+
+    /* ── Contact Form ── */
+    #contact { background: var(--bg); }
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 3rem;
+      margin-top: 2.5rem;
+    }
+    @media (max-width: 700px) { .contact-inner { grid-template-columns: 1fr; } }
+    .contact-info h3 { color: #fff; font-size: 1.1rem; margin-bottom: 0.75rem; }
+    .contact-info p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 1.5rem; }
+    .contact-detail {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.9rem;
+    }
+    .contact-detail-icon { font-size: 1.1rem; flex-shrink: 0; }
+    .contact-detail-text { color: var(--text-muted); }
+    .contact-detail-text strong { color: var(--text); display: block; }
+    form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 480px) { .form-row { grid-template-columns: 1fr; } }
+    label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.35rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    input, textarea, select {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      color: var(--text);
+      font-size: 0.95rem;
+      padding: 0.7rem 0.9rem;
+      font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(200, 151, 58, 0.15);
+    }
+    textarea { resize: vertical; min-height: 120px; }
+    .form-submit { margin-top: 0.5rem; }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.875rem;
+    }
+    footer .footer-brand { font-weight: 700; color: var(--text); margin-bottom: 0.5rem; }
+    footer .footer-links { display: flex; gap: 1.5rem; justify-content: center; margin-top: 1rem; flex-wrap: wrap; }
+    footer .footer-links a { color: var(--text-muted); font-size: 0.8rem; }
+    footer .footer-links a:hover { color: var(--accent); }
+
+    /* ── Utilities ── */
+    .mt-2 { margin-top: 2rem; }
+    .text-muted { color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════ NAV -->
+<nav id="top-nav">
+  <div class="nav-inner">
+    <span class="nav-brand">Precision<span>&amp;</span>Safety</span>
+    <ul class="nav-links">
+      <li><a href="#overview">Course</a></li>
+      <li><a href="#eligibility">Eligibility</a></li>
+      <li><a href="#gear">Gear</a></li>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#bio">Instructor</a></li>
+      <li><a href="#safety">Safety</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#contact" class="nav-cta">Enroll →</a></li>
+    </ul>
+    <button class="hamburger" aria-label="Open menu" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#overview" onclick="toggleMenu()">Course Overview</a>
+    <a href="#eligibility" onclick="toggleMenu()">Eligibility</a>
+    <a href="#gear" onclick="toggleMenu()">What to Bring</a>
+    <a href="#schedule" onclick="toggleMenu()">Schedule</a>
+    <a href="#bio" onclick="toggleMenu()">Instructor</a>
+    <a href="#safety" onclick="toggleMenu()">Safety &amp; Legal</a>
+    <a href="#faq" onclick="toggleMenu()">FAQ</a>
+    <a href="#contact" onclick="toggleMenu()" style="color:var(--accent);font-weight:700;">Enroll →</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="container hero-content">
+    <span class="hero-badge">Certified Firearms Instructor · Professional Course</span>
+    <h1 class="hero-title">
+      Ballistics &amp; Firearms<br/>
+      <em>Safety Mastery</em>
+    </h1>
+    <p class="hero-sub">
+      A rigorous, hands-on course covering internal, external, and terminal ballistics — paired with safe-handling fundamentals that will stay with you for life.
+    </p>
+    <div class="price-tag">
+      <span class="price-amount">$1,200</span>
+      <span class="price-suffix">per person</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Enroll Now</a>
+      <a href="#overview" class="btn btn-outline">See Course Details</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <span class="section-label">What You'll Learn</span>
+    <h2 class="section-title">Course Overview</h2>
+    <hr class="divider"/>
+    <p class="text-muted" style="max-width:680px;">
+      This course is structured around three interlinked disciplines. You will leave with a deep, practical understanding of how firearms work, how projectiles behave, and how to handle both safely and responsibly.
+    </p>
+    <div class="overview-grid">
+
+      <div class="overview-card">
+        <div class="overview-card-icon">🔩</div>
+        <h3>Internal Ballistics</h3>
+        <p>What happens inside the firearm from trigger pull to muzzle exit.</p>
+        <ul>
+          <li>Combustion chamber physics</li>
+          <li>Propellant chemistry &amp; burn rates</li>
+          <li>Pressure curves and barrel dynamics</li>
+          <li>Action types: semi-auto, bolt, revolver</li>
+          <li>Common malfunctions and their causes</li>
+        </ul>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-card-icon">📐</div>
+        <h3>External Ballistics</h3>
+        <p>The science of projectile flight from muzzle to target.</p>
+        <ul>
+          <li>Trajectory and the effects of gravity</li>
+          <li>Drag, spin stabilization &amp; precession</li>
+          <li>Wind deflection calculations</li>
+          <li>Ballistic coefficients (G1/G7)</li>
+          <li>Environmental factors: altitude, temperature, humidity</li>
+        </ul>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-card-icon">🎯</div>
+        <h3>Terminal Ballistics</h3>
+        <p>What occurs when a projectile interacts with its target.</p>
+        <ul>
+          <li>Wound ballistics and tissue dynamics</li>
+          <li>Expansion, fragmentation &amp; penetration</li>
+          <li>Ammunition selection principles</li>
+          <li>Material penetration and barrier performance</li>
+        </ul>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-card-icon">🛡️</div>
+        <h3>Safe Handling &amp; Mechanics</h3>
+        <p>Foundational skills every responsible firearm owner must have.</p>
+        <ul>
+          <li>The Four Fundamental Safety Rules</li>
+          <li>Loading, unloading, and administrative handling</li>
+          <li>Safe storage practices</li>
+          <li>Firearm anatomy and field-strip maintenance</li>
+          <li>Legal obligations for firearm owners</li>
+        </ul>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-card-icon">🏹</div>
+        <h3>Range Practicum</h3>
+        <p>Supervised live-fire sessions to apply everything you've learned.</p>
+        <ul>
+          <li>Stance, grip, sight alignment &amp; trigger control</li>
+          <li>Supported and unsupported shooting positions</li>
+          <li>Failure drills and stoppage clearing</li>
+          <li>Instructor-reviewed performance with feedback</li>
+        </ul>
+      </div>
+
+      <div class="overview-card">
+        <div class="overview-card-icon">📋</div>
+        <h3>Course Completion</h3>
+        <p>Leave with documented evidence of your training.</p>
+        <ul>
+          <li>Certificate of completion (print &amp; digital)</li>
+          <li>Personalized range performance summary</li>
+          <li>Resource packet: references, legal overview</li>
+          <li>Optional: written knowledge check</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ ELIGIBILITY -->
+<section id="eligibility">
+  <div class="container">
+    <span class="section-label">Requirements</span>
+    <h2 class="section-title">Who This Is For &amp; Prerequisites</h2>
+    <hr class="divider"/>
+    <p class="text-muted" style="max-width:680px;">
+      This course is open to civilians, hunters, competitive shooters, and professionals seeking a rigorous formal education in ballistics and safe firearm handling. There are a few firm requirements.
+    </p>
+    <div class="two-col">
+      <div class="card">
+        <h3>✓ Eligibility Requirements</h3>
+        <ul class="checklist">
+          <li><span>✓</span><span>Must be 21 years of age or older (18+ with written parental consent for non-handgun modules)</span></li>
+          <li><span>✓</span><span>Must be legally permitted to possess a firearm in the jurisdiction where the course is held</span></li>
+          <li><span>✓</span><span>No prior experience required — this course is suitable for beginners and experienced shooters alike</span></li>
+          <li><span>✓</span><span>Must pass a brief safety screening on day one (conducted by instructor)</span></li>
+          <li><span>✓</span><span>Must be physically capable of standing and participating in outdoor range activities</span></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>📄 Documentation to Bring</h3>
+        <ul class="checklist">
+          <li><span>→</span><span>Government-issued photo ID (driver's license or passport)</span></li>
+          <li><span>→</span><span>Proof of age if you appear under 30</span></li>
+          <li><span>→</span><span>Any applicable state firearm permit or license (if your jurisdiction requires one to possess/carry)</span></li>
+          <li><span>→</span><span>Completed waiver and enrollment form (provided upon registration)</span></li>
+          <li><span>→</span><span>Emergency contact information</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ GEAR -->
+<section id="gear">
+  <div class="container">
+    <span class="section-label">Preparation</span>
+    <h2 class="section-title">What to Bring</h2>
+    <hr class="divider"/>
+    <div class="gear-grid">
+
+      <div class="gear-card">
+        <h3>🛡️ Safety Equipment (Required)</h3>
+        <ul class="checklist">
+          <li><span>✓</span><span>ANSI-rated ballistic eye protection (wrap-around preferred)</span></li>
+          <li><span>✓</span><span>Hearing protection: ear muffs (NRR 22+) or quality foam plugs</span></li>
+          <li><span>✓</span><span>Double hearing protection strongly recommended for indoor range</span></li>
+        </ul>
+      </div>
+
+      <div class="gear-card">
+        <h3>👕 Clothing &amp; Attire</h3>
+        <ul class="checklist">
+          <li><span>✓</span><span>Closed-toe shoes — no sandals or open footwear on the range</span></li>
+          <li><span>✓</span><span>High-collar shirt to prevent brass ejection burns</span></li>
+          <li><span>✓</span><span>Weather-appropriate layering (range is partially outdoors)</span></li>
+          <li><span>✓</span><span>Hat with a forward brim to protect from ejected cases</span></li>
+        </ul>
+      </div>
+
+      <div class="gear-card">
+        <h3>🔫 Firearm &amp; Ammunition</h3>
+        <ul class="checklist">
+          <li><span>✓</span><span>Your personal firearm (optional — loaners available, see below)</span></li>
+          <li><span>✓</span><span>Factory-loaded ammunition only; no reloads permitted on range</span></li>
+          <li><span>✓</span><span>Minimum 100 rounds recommended for range day</span></li>
+          <li><span>✓</span><span>Approved calibers: [PLACEHOLDER — add your range's approved calibers]</span></li>
+        </ul>
+      </div>
+
+      <div class="gear-card">
+        <h3>📦 Classroom Essentials</h3>
+        <ul class="checklist">
+          <li><span>✓</span><span>Notebook and pen for classroom sessions</span></li>
+          <li><span>✓</span><span>Water bottle — range hydration is your responsibility</span></li>
+          <li><span>✓</span><span>Lunch or snacks (no food provided)</span></li>
+          <li><span>✓</span><span>All required documentation (see Eligibility section)</span></li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="gear-note">
+      <strong>Provided by instructor:</strong> Course handouts and reference materials, range targets, ear and eye protection loaners (limited availability — bring your own to guarantee a fit), and firearm loaners for the range practicum upon request (subject to approval and deposit). <em>Ammunition is not provided.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SCHEDULE -->
+<section id="schedule">
+  <div class="container">
+    <span class="section-label">Logistics</span>
+    <h2 class="section-title">Schedule &amp; Format</h2>
+    <hr class="divider"/>
+
+    <div class="overview-grid" style="margin-top:0; grid-template-columns: repeat(auto-fit, minmax(160px,1fr)); margin-bottom:2.5rem;">
+      <div class="stat-block">
+        <span class="stat-value">2</span>
+        <span class="stat-label">Days Total</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-value">8</span>
+        <span class="stat-label">Max Students</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-value">~6h</span>
+        <span class="stat-label">Classroom Hours</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-value">~6h</span>
+        <span class="stat-label">Range Hours</span>
+      </div>
+      <div class="stat-block">
+        <span class="stat-value">$1,200</span>
+        <span class="stat-label">Per Person</span>
+      </div>
+    </div>
+
+    <div class="schedule-body">
+      <div>
+        <h3 style="color:#fff; margin-bottom:1.25rem;">Day 1 — Classroom</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>8:00 AM — Check-in &amp; Introductions</h4>
+              <p>Safety screening, waiver review, and course overview.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>9:00 AM — Firearm Mechanics</h4>
+              <p>Action types, anatomy, field stripping, and function.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>11:00 AM — Internal Ballistics</h4>
+              <p>Combustion, chamber pressure, and barrel dynamics.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>1:00 PM — Lunch Break</h4>
+              <p>One hour. Bring your own food or there are options nearby.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>2:00 PM — External &amp; Terminal Ballistics</h4>
+              <p>Flight physics, trajectory, terminal effects, and ammo selection.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>4:30 PM — Safe Handling &amp; Legal Framework</h4>
+              <p>Four rules, storage, transport, and relevant laws.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div></div>
+            <div class="timeline-content">
+              <h4>5:30 PM — Q&amp;A and Day 1 Close</h4>
+              <p>Open discussion and prep briefing for range day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="color:#fff; margin-bottom:1.25rem;">Day 2 — Range</h3>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>8:00 AM — Range Orientation</h4>
+              <p>Range rules, emergency procedures, and gear check.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>9:00 AM — Dry-Fire Fundamentals</h4>
+              <p>Stance, grip, sight alignment, and trigger control — no ammunition.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>10:30 AM — Live-Fire Basics</h4>
+              <p>Supervised individual shooting with real-time instructor feedback.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>12:30 PM — Lunch Break</h4>
+              <p>One hour. Do not leave your firearm unattended.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>1:30 PM — Failure Drills &amp; Stoppages</h4>
+              <p>Tap-rack-assess, controlled pairs, and stoppage clearing exercises.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div><div class="line"></div></div>
+            <div class="timeline-content">
+              <h4>3:30 PM — Performance Review</h4>
+              <p>Individual target analysis and instructor debriefs.</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-line"><div class="dot"></div></div>
+            <div class="timeline-content">
+              <h4>5:00 PM — Certificates &amp; Close</h4>
+              <p>Certificates distributed, final Q&amp;A, and resource packets.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card mt-2">
+      <h3 style="color:var(--accent); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.75rem;">Location</h3>
+      <p class="text-muted">
+        📍 <strong style="color:var(--text);">[PLACEHOLDER — Insert your venue name and address here]</strong><br/>
+        Classroom sessions take place in a climate-controlled facility. Range sessions are conducted at a licensed, covered outdoor range on the same property. Exact directions provided upon enrollment confirmation.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ BIO -->
+<section id="bio">
+  <div class="container">
+    <span class="section-label">Your Instructor</span>
+    <h2 class="section-title">Meet the Instructor</h2>
+    <hr class="divider"/>
+    <div class="bio-card">
+      <div class="bio-avatar">👤</div>
+      <div>
+        <div class="bio-name">[Your Full Name]</div>
+        <div class="bio-title">Certified Firearms Instructor · Ballistics Specialist</div>
+        <div class="bio-body">
+          <p>
+            [PLACEHOLDER — This is where you describe your background. For example: "With over X years of experience in law enforcement / military service / competitive shooting, I've trained hundreds of students ranging from first-time firearm owners to seasoned professionals. My approach emphasizes understanding over memorization — I want you to know why every safety rule exists, not just that it does."]
+          </p>
+          <p style="margin-top:0.75rem;">
+            [PLACEHOLDER — Add a personal note here: your philosophy, what inspired you to train others, or a brief story that reflects your teaching approach.]
+          </p>
+        </div>
+        <div class="credentials">
+          <span class="cred-badge">[Certification 1, e.g. NRA Certified Instructor]</span>
+          <span class="cred-badge">[Certification 2]</span>
+          <span class="cred-badge">[Certification 3]</span>
+          <span class="cred-badge">[Years of Service / Experience]</span>
+          <span class="cred-badge">[Specialty, e.g. Law Enforcement Background]</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ SAFETY -->
+<section id="safety">
+  <div class="container">
+    <span class="section-label">Our Commitment</span>
+    <h2 class="section-title">Safety &amp; Legal</h2>
+    <hr class="divider"/>
+    <p class="text-muted" style="max-width:700px; margin-bottom:2.5rem;">
+      Safety is not one item on a checklist — it is the organizing principle of everything we do. From day one of classroom instruction to every trigger pull on the range, safety protocols govern the course.
+    </p>
+    <div class="safety-grid">
+      <div class="safety-item">
+        <h3>The Four Rules</h3>
+        <p>Every participant is required to demonstrate knowledge of and adherence to the Four Fundamental Firearm Safety Rules at all times on the range. Violations result in immediate removal.</p>
+      </div>
+      <div class="safety-item">
+        <h3>Instructor Control</h3>
+        <p>An instructor or range safety officer is present and supervising at all times during live-fire exercises. The instructor's command is law on the range.</p>
+      </div>
+      <div class="safety-item">
+        <h3>Medical Preparedness</h3>
+        <p>A trauma kit is on-site at all range sessions. The instructor holds current first-aid and CPR certification. [PLACEHOLDER — add any specific medical arrangements.]</p>
+      </div>
+      <div class="safety-item">
+        <h3>Legal Compliance</h3>
+        <p>All course activities are conducted in full compliance with applicable federal, state, and local firearm laws. Students are required to be in legal standing to possess and use firearms.</p>
+      </div>
+      <div class="safety-item">
+        <h3>Zero Tolerance</h3>
+        <p>Unsafe behavior, misrepresentation of eligibility, or violation of course rules will result in immediate dismissal without refund.</p>
+      </div>
+      <div class="safety-item">
+        <h3>Liability &amp; Waiver</h3>
+        <p>All participants must sign a liability waiver prior to attending. The waiver will be provided with your enrollment confirmation for review before the course date.</p>
+      </div>
+    </div>
+    <div class="legal-note">
+      <strong>Legal notice:</strong> This course is for educational and lawful training purposes only. Completion of this course does not constitute a license to carry, a concealed-carry permit, or any other legal authorization beyond what your jurisdiction already permits. Laws vary by state and locality — participants are responsible for understanding and complying with all applicable laws in their jurisdiction.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FAQ -->
+<section id="faq">
+  <div class="container">
+    <span class="section-label">Questions</span>
+    <h2 class="section-title">Frequently Asked Questions</h2>
+    <hr class="divider"/>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Do I need to own a firearm to attend?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          No. Loaner firearms are available for the range practicum upon request and subject to prior approval. However, we strongly encourage you to use your own firearm if you own one, as training with the firearm you will actually use is far more beneficial. Contact us before enrolling to discuss loaner availability.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Is this course suitable for complete beginners?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Absolutely. The course is designed from the ground up — no prior shooting experience is assumed. We cover foundational mechanics and safety before any live-fire exercises occur. Many of our students have zero prior experience and leave with a solid, confident foundation. Experienced shooters will gain depth in the ballistics science that most practical courses skip.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What is the refund and cancellation policy?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          [PLACEHOLDER — Insert your specific policy here. Example: "Full refund if cancelled 14+ days before the course date. 50% refund for cancellations 7–13 days before. No refund within 7 days, but you may transfer your enrollment to a future session at no charge. Cancellations due to documented medical emergencies are handled case-by-case."]
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Will this course qualify me for a concealed-carry permit?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          This depends entirely on your state. Some states accept or require a course like this as part of their CCW/CHL application process; others have their own mandated curriculum. We recommend checking your state's requirements before enrolling if CCW qualification is your primary goal. We can provide documentation of your completion that you may submit to the relevant authority.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          How many students are in each session?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Class size is capped at 8 students per session. This is intentional — small class sizes allow for meaningful individual attention, especially during range exercises where personalized feedback makes the biggest difference. Sessions fill quickly; early enrollment is recommended.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          What if it rains on the range day?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          [PLACEHOLDER — Add your weather contingency policy. Example: "The range has covered firing lanes, so light rain does not typically affect operations. In the event of severe weather (lightning, high wind, flooding) that makes range use unsafe, the range day will be rescheduled at no additional cost. You will be notified by email no later than 6 AM on the morning of range day if a reschedule is necessary."]
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Are there any physical requirements?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Participants should be capable of standing for extended periods and handling the physical demands of a range environment. If you have a physical limitation, please contact us before enrolling so we can discuss accommodations. We make every reasonable effort to accommodate students with disabilities.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Is ammunition included in the course price?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          Ammunition is not included. Students are responsible for bringing their own factory-loaded ammunition. We recommend a minimum of 100 rounds. Only factory ammunition is permitted on the range — hand-loaded or reloaded ammunition is not allowed for safety and liability reasons.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ CONTACT -->
+<section id="contact">
+  <div class="container">
+    <span class="section-label">Get Started</span>
+    <h2 class="section-title">Enroll or Request Information</h2>
+    <hr class="divider"/>
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h3>Ready to train?</h3>
+        <p>
+          Use this form to request enrollment or ask any questions. You'll receive a response within 24 hours with availability, the enrollment waiver, and payment instructions.
+        </p>
+        <p>
+          Class size is limited to <strong>8 students</strong>. Spots are confirmed on a first-come, first-served basis after deposit is received.
+        </p>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">💰</span>
+          <div class="contact-detail-text">
+            <strong>Course Fee</strong>
+            $1,200 per person — deposit required to secure your spot
+          </div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">📍</span>
+          <div class="contact-detail-text">
+            <strong>Location</strong>
+            [PLACEHOLDER — Your city/region] · Exact address on enrollment confirmation
+          </div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">📅</span>
+          <div class="contact-detail-text">
+            <strong>Next Session</strong>
+            [PLACEHOLDER — Insert your next available course date]
+          </div>
+        </div>
+        <div class="contact-detail">
+          <span class="contact-detail-icon">✉️</span>
+          <div class="contact-detail-text">
+            <strong>Email</strong>
+            [PLACEHOLDER — your@email.com]
+          </div>
+        </div>
+      </div>
+
+      <form
+        action="mailto:your@email.com"
+        method="post"
+        enctype="text/plain"
+        id="enrollment-form"
+        onsubmit="handleSubmit(event)"
+      >
+        <div class="form-row">
+          <div>
+            <label for="first-name">First Name *</label>
+            <input type="text" id="first-name" name="first_name" required placeholder="Jane" />
+          </div>
+          <div>
+            <label for="last-name">Last Name *</label>
+            <input type="text" id="last-name" name="last_name" required placeholder="Smith" />
+          </div>
+        </div>
+        <div>
+          <label for="email">Email Address *</label>
+          <input type="email" id="email" name="email" required placeholder="jane@example.com" />
+        </div>
+        <div>
+          <label for="phone">Phone Number</label>
+          <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" />
+        </div>
+        <div>
+          <label for="interest">I'm interested in</label>
+          <select id="interest" name="interest">
+            <option value="enroll">Enrolling in the next session</option>
+            <option value="future">Joining a future session / waitlist</option>
+            <option value="info">Getting more information first</option>
+            <option value="private">Discussing a private / group booking</option>
+          </select>
+        </div>
+        <div>
+          <label for="experience">Prior firearms experience</label>
+          <select id="experience" name="experience">
+            <option value="none">None — complete beginner</option>
+            <option value="some">Some — handled firearms a few times</option>
+            <option value="intermediate">Intermediate — comfortable with basics</option>
+            <option value="experienced">Experienced — looking for deeper knowledge</option>
+          </select>
+        </div>
+        <div>
+          <label for="message">Questions or Additional Notes</label>
+          <textarea id="message" name="message" placeholder="Any questions, special requirements, or details you'd like to share..."></textarea>
+        </div>
+        <div class="form-submit">
+          <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center; font-size:1.05rem; padding:0.9rem;">
+            Submit Inquiry →
+          </button>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); text-align:center; margin-top:0.5rem;">
+          Submitting this form does not guarantee enrollment. A spot is reserved only after confirmation and deposit.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-brand">Precision &amp; Safety — Firearms Training</div>
+    <div class="text-muted">[PLACEHOLDER — Your name or business name] · [City, State]</div>
+    <div class="footer-links">
+      <a href="#overview">Course</a>
+      <a href="#eligibility">Eligibility</a>
+      <a href="#schedule">Schedule</a>
+      <a href="#bio">Instructor</a>
+      <a href="#safety">Safety &amp; Legal</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <p style="margin-top:1.5rem; font-size:0.75rem;">
+      © <span id="year"></span> [Your Name / Business Name]. All rights reserved. · This course is for lawful educational use only.
+    </p>
+  </div>
+</footer>
+
+<script>
+  // ── Dynamic year ──
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // ── Mobile menu ──
+  function toggleMenu() {
+    document.getElementById('mobile-menu').classList.toggle('open');
+  }
+
+  // ── FAQ accordion ──
+  function toggleFaq(questionEl) {
+    const item = questionEl.parentElement;
+    const isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    // Open clicked if it wasn't already open
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // ── Form submit handler ──
+  // Since this is a static site, we fall back to a mailto link.
+  // To use a real form service (Formspree, Netlify Forms), swap the
+  // form action and remove this handler.
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    const firstName = data.get('first_name') || '';
+    const lastName  = data.get('last_name')  || '';
+    const email     = data.get('email')      || '';
+    const phone     = data.get('phone')      || '';
+    const interest  = data.get('interest')   || '';
+    const experience = data.get('experience') || '';
+    const message   = data.get('message')    || '';
+
+    const body = [
+      `Name: ${firstName} ${lastName}`,
+      `Email: ${email}`,
+      `Phone: ${phone}`,
+      `Interest: ${interest}`,
+      `Experience: ${experience}`,
+      `Message: ${message}`,
+    ].join('\n');
+
+    const mailto = `mailto:your@email.com?subject=${encodeURIComponent('Course Inquiry – ' + firstName + ' ' + lastName)}&body=${encodeURIComponent(body)}`;
+    window.location.href = mailto;
+  }
+
+  // ── Navbar highlight on scroll ──
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        navLinks.forEach(link => {
+          link.style.color = link.getAttribute('href') === '#' + entry.target.id
+            ? 'var(--accent)'
+            : '';
+        });
+      }
+    });
+  }, { threshold: 0.35 });
+
+  sections.forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
